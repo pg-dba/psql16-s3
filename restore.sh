@@ -7,7 +7,7 @@ NC='\033[0m'
 if [[ ! -z "$1" && ! -z "$2" ]];
 then
 
-mc du --recursive minio/${MINIO_BACKET}/${1}/base/${2}
+mc du --recursive minio/${MINIO_BUCKET}/${1}/base/${2}
 RC=$?
 
 if [[ ${RC} == 0 ]];
@@ -19,7 +19,7 @@ echo -e "\n${YELLOW}directory must be empty before restore${NC}"
 ls -la /var/lib/postgresql/data/
 
 echo -e "\n${RED}full backup $1 restoring...${NC}"
-barman-cloud-restore --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BACKET} $1 $2 /var/lib/postgresql/data/
+barman-cloud-restore --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BUCKET} $1 $2 /var/lib/postgresql/data/
 
 echo -e "\n${YELLOW}prepare for WAL restore:${NC}"
 
@@ -32,7 +32,7 @@ sed -i 's/ARCHIVE=1/ARCHIVE=0/' /var/lib/postgresql/data/archive_wal.sh
 cat /var/lib/postgresql/data/archive_wal.sh | grep -v -P '^\s*(#|;|$)' | grep "DEBUG=\|LOG=\|ARCHIVE="
 
 echo -e "\n${YELLOW}command for restoring WAL${NC}"
-echo "restore_command = 'barman-cloud-wal-restore --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BACKET} $1 %f %p'" > /var/lib/postgresql/data/recovery.conf
+echo "restore_command = 'barman-cloud-wal-restore --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BUCKET} $1 %f %p'" > /var/lib/postgresql/data/recovery.conf
 if [[ -z "$3" ]]; then
 echo "recovery_target_timeline = 'latest'" >> /var/lib/postgresql/data/recovery.conf
 else

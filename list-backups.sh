@@ -9,12 +9,12 @@ then
 
 echo -e "\n${YELLOW}backuped servers list:${NC}"
 
-mc ls minio/${MINIO_BACKET}
+mc ls minio/${MINIO_BUCKET}
 
 else
 
 echo -e "\n${YELLOW}full backup list for $1:${NC}"
 
-barman-cloud-backup-list --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BACKET} $1
+barman-cloud-backup-list --endpoint-url ${MINIO_ENDPOINT_URL} s3://${MINIO_BUCKET} $1
 
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ! -z ${MINIO_BACKET+x} ]]; then 
+if [[ ! -z ${MINIO_BUCKET+x} ]]; then 
 
 aws configure --profile minio set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
 aws configure --profile minio set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
