@@ -2,9 +2,9 @@
 
 if [[ ! -z ${MINIO_BUCKET+x} ]]; then 
 
-aws configure --profile minio set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
-aws configure --profile minio set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
-mc config --quiet host add minio ${MINIO_ENDPOINT_URL} ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
+aws configure --profile minio set aws_access_key_id "${MINIO_ACCESS_KEY_ID}"
+aws configure --profile minio set aws_secret_access_key "${MINIO_SECRET_ACCESS_KEY}"
+mc config --quiet host add minio ${MINIO_ENDPOINT_URL} ${MINIO_ACCESS_KEY_ID} ${MINIO_SECRET_ACCESS_KEY}
 
 #cat /root/.aws/credentials 
 #cat /var/lib/postgresql/.aws/credentials 
