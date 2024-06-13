@@ -17,6 +17,7 @@ RUN wget --quiet https://dl.min.io/client/mc/release/linux-amd64/mc && \
     chmod 700 mc && \
     mv mc /usr/bin/
 
+RUN rm -rf /var/lib/postgresql/16
 RUN mkdir -p /var/lib/postgresql/data
 
 VOLUME /var/lib/postgresql/data
